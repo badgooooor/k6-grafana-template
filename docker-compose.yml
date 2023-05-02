@@ -4,6 +4,9 @@ networks:
   k6:
   grafana:
 
+volumes:
+  influx_data:
+
 services:
   influxdb:
     image: influxdb:1.8
@@ -16,6 +19,8 @@ services:
       - "8086:8086"
     environment:
       - INFLUXDB_DB=k6
+    volumes:
+      - influx_data:/var/lib/influxdb
 
   grafana:
     image: grafana/grafana:8.5.21
